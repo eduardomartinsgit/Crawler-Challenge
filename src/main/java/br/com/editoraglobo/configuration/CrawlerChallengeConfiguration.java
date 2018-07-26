@@ -22,7 +22,7 @@ import br.com.editoraglobo.crawler.Crawler;
 @SpringBootApplication
 public class CrawlerChallengeConfiguration {
 	public static void main(String[] args) {
-		Crawler.rastreamentoFeed("https://revistaautoesporte.globo.com/rss/ultimas/feed.xml");
+		Crawler.crawlerFeed("https://revistaautoesporte.globo.com/rss/ultimas/feed.xml");
 		SpringApplication.run(CrawlerChallengeConfiguration.class, args);
 	}
 }
