@@ -1,6 +1,5 @@
 package br.com.editoraglobo.crawler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +11,10 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.com.editoraglobo.model.DescriptionVO;
-import br.com.editoraglobo.model.ItemVO;
+import br.com.editoraglobo.model.DescriptionAbstract;
+import br.com.editoraglobo.model.vo.DescriptionAnchorVO;
+import br.com.editoraglobo.model.vo.DescriptionVO;
+import br.com.editoraglobo.model.vo.ItemVO;
 
 /**
  * Classe responsável por prover método de rastreamento(crawler) de conteudo a partir de uma URL
@@ -42,28 +43,22 @@ public class Crawler {
 					ItemVO item = new ItemVO();
 					Element descriptionUnparse = itemElement.selectFirst("description");
 					Document descriptionParse = Jsoup.parse(descriptionUnparse.text());
-					List<DescriptionVO> listDescriptionContent = new ArrayList<DescriptionVO>();
+					List<DescriptionAbstract> listDescriptionContent = new ArrayList<DescriptionAbstract>();
 					
 					item.setTitle(itemElement.select("title").text());
 					item.setLink(itemElement.select("link").text());
-					
+					Elements linkElements = descriptionParse.select("ul a");
 					
 					crawlerParagraphTag(descriptionParse, listDescriptionContent);
 					crawlerImageTag(descriptionParse, listDescriptionContent);
-					
-					Elements linkElements = descriptionParse.select("ul a");
-					List<String> listDescriptionAnchor = new ArrayList<String>();
-					DescriptionVO content = crawlerAnchorTag(linkElements, listDescriptionAnchor);
-					
-					content.setContents(listDescriptionAnchor);
-					listDescriptionContent.add(content);
+					crawlerAnchorTag(linkElements, listDescriptionContent);
 					
 					item.setDescription(listDescriptionContent);
 					listItems.add(item);
 				}
 				
 			}			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
 		return listItems;
@@ -75,17 +70,20 @@ public class Crawler {
 	 * @param listDescriptionAnchor
 	 * @return
 	 */
-	private static DescriptionVO crawlerAnchorTag(Elements anchorElements, List<String> listDescriptionAnchor) {
+	private static void crawlerAnchorTag(Elements anchorElements, List<DescriptionAbstract> listDescriptionContent) {
 		LOGGER.debug("RASTREANDO TAGS <a>");
 		
-		DescriptionVO descriptionContent = new DescriptionVO();
+		List<String> sourceAnchor = new ArrayList<String>();
+		DescriptionAnchorVO descriptionContent = new DescriptionAnchorVO();
+		
 		descriptionContent.setType("link");
 		for (Element anchorElement : anchorElements) {
 			if(!anchorElement.text().equals("") && !anchorElement.attr("href").equals("")) {
-				listDescriptionAnchor.add(anchorElement.attr("href"));
+				sourceAnchor.add(anchorElement.attr("href"));
 			}
 		}
-		return descriptionContent;
+		descriptionContent.setContent(sourceAnchor);
+		listDescriptionContent.add(descriptionContent);
 	}
 
 	/**
@@ -93,7 +91,7 @@ public class Crawler {
 	 * @param descriptionParse
 	 * @param listDescriptionContent
 	 */
-	private static void crawlerImageTag(Document descriptionParse, List<DescriptionVO> listDescriptionContent) {
+	private static void crawlerImageTag(Document descriptionParse, List<DescriptionAbstract> listDescriptionContent) {
 		LOGGER.debug("RASTREANDO TAGS <img>");
 		
 		Elements imageElements = descriptionParse.select("img");
@@ -112,7 +110,7 @@ public class Crawler {
 	 * @param descriptionParse
 	 * @param listDescriptionContent
 	 */
-	private static void crawlerParagraphTag(Document descriptionParse, List<DescriptionVO> listDescriptionContent) {
+	private static void crawlerParagraphTag(Document descriptionParse, List<DescriptionAbstract> listDescriptionContent) {
 		LOGGER.debug("RASTREANDO TAGS <p>");
 		
 		Elements paragraphElements = descriptionParse.select("p");

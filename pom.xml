@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>Crawler-Challenge</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Crawler Challenge from Software Engineer Selective Process</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
