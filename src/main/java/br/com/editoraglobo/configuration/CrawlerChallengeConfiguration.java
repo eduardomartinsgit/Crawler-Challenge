@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import br.com.editoraglobo.crawler.Crawler;
+
 /**
  * Classe responsável pela inicialização do Spring Boot e suas configurações através de annotações.
  * @author Eduardo Martins
@@ -20,6 +22,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @SpringBootApplication
 public class CrawlerChallengeConfiguration {
 	public static void main(String[] args) {
+		Crawler.rastreamentoFeed("https://revistaautoesporte.globo.com/rss/ultimas/feed.xml");
 		SpringApplication.run(CrawlerChallengeConfiguration.class, args);
 	}
 }
