@@ -33,9 +33,8 @@ public class Crawler {
 		
 		List<ItemVO> listItems = new ArrayList<ItemVO>();
 		try {
-			Document documento;
-			documento = Jsoup.connect(URL_FEED).get();
-			Elements itemElements = documento.select("item");
+			Document document  = Jsoup.connect(URL_FEED).get();
+			Elements itemElements = document.select("item");
 			
 			for (Element itemElement : itemElements) {
 				if(itemElement != null) {
