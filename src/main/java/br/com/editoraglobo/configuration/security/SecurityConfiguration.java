@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
- * Método responsável por realizar uma configuração básica de segurança para acesso as URIs providas pelo sistema.
- * USER: admin
- * PASS: pass
+ * Método responsável por realizar uma configuração básica de segurança para
+ * acesso as URIs providas pelo sistema. USER: admin PASS: pass
+ * 
  * @author Eduardo Martins
  *
  */
