@@ -28,3 +28,4 @@ mvnw.cmd
 .mvn/wrapper/maven-wrapper.jar
 .mvn/wrapper/maven-wrapper.properties
 crawlerLog.log
+crawlerLog.log .2018-07-26.0.gz

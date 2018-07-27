@@ -25,6 +25,22 @@ Criar um crawler que leia [este feed](http://revistaautoesporte.globo.com/rss/ul
 | | Spring Boot Devtools |
 
 # Configurações Necessárias
+
+#### Criando imagem no Docker
+    Caso queira montar a imagem a partir do Dockerfile incluso na aplicação:
+    - Abra o docker terminal e navegue até a pasta onde encontra-se o projeto(./Crawler-Challenge).
+    - Inicialmente, execute o comando: mvn clean install
+    - Após a conclusão do comando anterior, execute o comando: docker build -f Dockerfile -t crawlerchallenge (Onde Dockerfile é o arquivo de criação da imagem, crawlerchallenge é o nome da imagem a ser criada)
+    - Em seguida, execute o comando: docker run -d -p 8080:8080 crawlerchallenge 
+    - Pronto! Para verificar se o container está ativo, execute o comando: docker ps (Verifique se o nome crawlerchallenge aparece no resultado)
+    - Caso esteja utilizando o Docker Toolbox, execute o comando para verificar o IP da máquina virtual na qual do docker está: docker-machine ip
+    
+   #### Utilizando imagem Docker previamente criada
+    Caso queira utilizar a imagem disponibilizada através do meu perfil no Docker Hub
+    Execute o comando: docker run -p 8080:8080 eduardomartinsdocker/crawlerchallenge
+
+
+
 #### Dependencias do Maven
 
 ```xml 
