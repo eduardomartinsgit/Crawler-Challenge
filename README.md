@@ -1,5 +1,5 @@
 
-## Desafio Desenvolvedor Java
+## Desafio - Engenharia Backend Infoglobo
 > **Desenvolvedor:** Eduardo Martins - [LinkedIn
 ](https://www.linkedin.com/in/eduardo-martins-849534110/)
 
@@ -78,6 +78,9 @@ Criar um crawler que leia [este feed](http://revistaautoesporte.globo.com/rss/ul
 
     @GET
     - Parametro: uri (Caso o parâmetro seja nulo, será utilizado como default a URI https://revistaautoesporte.globo.com/rss/ultimas/feed.xml)
+    - Usuario: admin
+    - Senha: pass
+    
     http://localhost:8080/crawler  - Retorna o JSON estruturado conforme a especificação.
 
 #### Configuração da Aplicação no Eclipse
@@ -91,4 +94,9 @@ Criar um crawler que leia [este feed](http://revistaautoesporte.globo.com/rss/ul
     Após a importação do projeto, localize a classe (Atalho do Eclipse: Control + Shift + R) CrawlerChallengeConfiguration.
     Clique com o botão direito do mouse dentro da classe e selecione: Run As -> Java Application.
 
-![inicialização do projeto](https://uploaddeimagens.com.br/images/001/531/410/original/Crawler.png?1532653873)
+![inicialização da aplicação](https://uploaddeimagens.com.br/images/001/531/410/original/Crawler.png?1532653873)
+
+#### Request WebService através do Postman/cURL
+
+    Abaixo um exemplo de requisição do serviço "/crawler" utilizando as ferramentas Postman e cURL.
+![request webservice crawler](https://uploaddeimagens.com.br/images/001/531/436/original/request.PNG?1532654417)
